@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html ng-app='ticTacToe' ng-controller='TicTacToeController as c'>
+<head>
+    <title>Tic-Tac-Toe (NGES Demo)</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" href="/style.css"></link>
+</head>
+<body>
+    <div class="container">
+    <div class="page-header">
+        <h1>Tic-Tac-Toe <small>NGES Demo</small></h1>
+    </div>
+        <div class="row">
+            <div ng-if="!c.gameState.isGameRunning()" class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 class="text-center">Ready to play...</h2></div>
+                </div>
+            </div>
+            <div ng-if="c.gameState.isGameRunning()" class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 class="text-center">{{c.gameState.currentGame.name}}</h2></div>
+                    <div class="panel-body">
+                    <table id="game-table">
+                        <tr><td ttt-cell="0"></td><td ttt-cell="1"></td><td ttt-cell="2"></td></tr>
+                        <tr><td ttt-cell="3"></td><td ttt-cell="4"></td><td ttt-cell="5"></td></tr>
+                        <tr><td ttt-cell="6"></td><td ttt-cell="7"></td><td ttt-cell="8"></td></tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-controller='GameListController as glc' id="game-list">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="text-center">Games</h2>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-inline">
+                            <div class="form-group">
+                            <label for="newGameName">New Game:</label>
+                            <input id="newGameName" class="form-control" id="new-game-name" type="text" ng-model="glc.newGameName"></input>
+                            <a class="btn btn-primary" ng-disabled="!glc.newGameName" ng-click="glc.startGame()">Start</a>
+                            <a class="btn btn-default" ng-click="glc.randomizeNewGameName()">Generate Name</a>
+                            </div>
+                        </form>
+                        <h3 class="text-center">History</h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr><th>Game</th><th>Winner</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="game in glc.games" ng-click="glc.join(game)">
+                                    <td>{{game.meta.name}}</td>
+                                    <td>{{game.winner}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+    <script src="ngSSE.js"></script>
+    <script src="ticTacToe.js"></script>
+</body>
+</html>
