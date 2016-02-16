@@ -28,7 +28,7 @@ remember, it's just a demo tic-tac-toe game! There is no point introducing too m
 
 A realistic application will most likely have some kind of persistence for the read model, but it's a
 well-understood area. Implementing it in this project would only add complexity for little value, so it is
-omitted in favor of streaming the events directly.
+omitted in this demo in favor of streaming the events directly.
 
 ## Running
 
